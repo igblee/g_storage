@@ -17,11 +17,5 @@ module.exports = {
   resolve: {
     extensions: ['.json', '.js', '.jsx', '.ts', ]
   },
-  devtool: 'inline-source-map',
-  devServer: {
-    contentBase: path.join('/dist/'),
-    inline: true,
-    host: '0.0.0.0',
-    port: 8080,
-  }
+  devtool: 'source-map',
 };
