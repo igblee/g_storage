@@ -1,7 +1,7 @@
 import { Cookie } from "./util/cookie";
 import { LocalStorage, SessionStorage } from './util/storage';
 
-class Storage implements StorageInterface {
+export class Storage implements StorageInterface {
   ns: string;
   encryption: boolean;
   encryptionType: string;
