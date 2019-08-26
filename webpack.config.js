@@ -1,21 +1,37 @@
 const path = require('path');
+const library = 'storage';
 module.exports = {
   mode: 'production',
   entry: path.join(__dirname, 'index.ts'),
-  watch: true,
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist/')
+    library: {
+      root: library,
+      amd: `${library}.amd`,
+      commonjs: `${library}.common`
+    },
+    libraryTarget: 'umd',
+    path: path.join(__dirname, 'dist'),
+    filename: 'main.js',
+    globalObject: 'this'
   },
   module: {
     rules: [{
       test: /\.tsx?$/,
-      use: 'ts-loader',
-      exclude: /node_modules/
+      use: [{
+        loader: 'tslint-loader',
+        options: {
+          configFile: './tslint.json',
+          typeCheck: true,
+          failOnHint: true
+        }
+      }]
+    }, {
+      test: /\.tsx?$/,
+      loader: 'ts-loader'
     }]
   },
   resolve: {
-    extensions: ['.json', '.js', '.jsx', '.ts', ]
+    extensions: ['.json', '.js', '.jsx', '.ts', '.tsx']
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
 };
