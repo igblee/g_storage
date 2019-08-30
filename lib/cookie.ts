@@ -17,12 +17,12 @@ export class Cookie {
     this.encryptionType = encryptionType;
     this.screctKey = screctKey;
   }
-  public getItem(sKey: string): string {
-    let res: string = null;
+  public getItem(sKey: string): string | null {
+    let res: string | null = null;
     if (this.ns.length) {
       sKey = this.ns + '.' + sKey;
     }
-    const tVal: string =
+    const tVal: string | null =
       decodeURIComponent(
         document.cookie.replace(
           new RegExp(
@@ -34,7 +34,7 @@ export class Cookie {
         )
       ) || null;
     res = tVal;
-    if (this.encryption && this.encryptionType) {
+    if (res && this.encryption && this.encryptionType) {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(res, this.screctKey).toString(

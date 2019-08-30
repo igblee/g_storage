@@ -17,14 +17,14 @@ export class LocalStorage {
     this.encryptionType = encryptionType;
     this.screctKey = screctKey;
   }
-  public getItem(sKey: string): string {
-    let res: string = null;
+  public getItem(sKey: string): string | null {
+    let res: string | null = null;
     if (this.ns.length) {
       sKey = this.ns + '.' + sKey;
     }
-    const tVal: string = decodeURIComponent(localStorage.getItem(sKey)) || null;
+    const tVal: string | null = localStorage.getItem(sKey) || null;
     res = tVal;
-    if (this.encryption && this.encryptionType) {
+    if (res && this.encryption && this.encryptionType) {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(tVal, this.screctKey).toString(
@@ -85,15 +85,15 @@ export class SessionStorage {
     this.encryptionType = encryptionType;
     this.screctKey = screctKey;
   }
-  public getItem(sKey: string): string {
-    let res: string = null;
+  public getItem(sKey: string): string | null {
+    let res: string | null = null;
     if (this.ns.length) {
       sKey = this.ns + '.' + sKey;
     }
-    const tVal: string =
-      decodeURIComponent(sessionStorage.getItem(sKey)) || null;
+    const tVal: string | null =
+      sessionStorage.getItem(sKey) || null;
     res = tVal;
-    if (this.encryption && this.encryptionType) {
+    if ( res && this.encryption && this.encryptionType) {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(tVal, this.screctKey).toString(
