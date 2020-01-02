@@ -1,6 +1,6 @@
 {
   "name": "namespace_storage",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "add namespace and encryption to cookie localstorage and sessionstorage",
   "main": "dist/storage-umd.js",
   "module": "dist/storage-esm.js",
