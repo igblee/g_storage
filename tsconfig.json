@@ -1,10 +1,35 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
+    "newLine": "LF",
+    "target": "es2020",
+    "module": "commonjs",
+    "outDir": "dist",
     "noImplicitAny": true,
-    "sourceMap": true,
-    "module": "es6",
-    "target": "es5",
-    "allowJs": true
-  }
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "esModuleInterop": true,
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types/",
+      "type.d.ts",
+    ]
+  },
+  "include": [
+    "*.ts",
+    "src/**/*.ts",
+    "src/test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

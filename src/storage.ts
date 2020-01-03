@@ -1,7 +1,7 @@
 // tslint:disable-next-line:no-var-requires
 const CryptoJS = require('crypto-js');
-
-export class LocalStorage {
+import { IStorageItem } from '../type';
+export class LocalStorage implements IStorageItem {
   private ns: string;
   private encryption: boolean;
   private encryptionType: string;
@@ -28,11 +28,11 @@ export class LocalStorage {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(tVal, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            )
+            CryptoJS.enc.Utf8
+          )
           : CryptoJS.AES.decrypt(tVal, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            );
+            CryptoJS.enc.Utf8
+          );
     }
     return res;
   }
@@ -69,7 +69,7 @@ export class LocalStorage {
   }
 }
 
-export class SessionStorage {
+export class SessionStorage implements IStorageItem {
   private ns: string;
   private encryption: boolean;
   private encryptionType: string;
@@ -93,15 +93,15 @@ export class SessionStorage {
     const tVal: string | null =
       sessionStorage.getItem(sKey) || null;
     res = tVal;
-    if ( res && this.encryption && this.encryptionType) {
+    if (res && this.encryption && this.encryptionType) {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(tVal, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            )
+            CryptoJS.enc.Utf8
+          )
           : CryptoJS.AES.decrypt(tVal, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            );
+            CryptoJS.enc.Utf8
+          );
     }
     return res;
   }

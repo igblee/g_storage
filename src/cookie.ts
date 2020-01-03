@@ -1,7 +1,7 @@
 // tslint:disable-next-line:no-var-requires
 const CryptoJS = require('crypto-js');
-
-export class Cookie {
+import { ICookie } from '../type';
+export class Cookie implements ICookie {
   private ns: string;
   private encryption: boolean;
   private encryptionType: string;
@@ -27,8 +27,8 @@ export class Cookie {
         document.cookie.replace(
           new RegExp(
             '(?:(?:^|.*;)\\s*' +
-              encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
-              '\\s*\\=\\s*([^;]*).*$)|^.*$'
+            encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
+            '\\s*\\=\\s*([^;]*).*$)|^.*$'
           ),
           '$1'
         )
@@ -38,11 +38,11 @@ export class Cookie {
       res =
         this.encryptionType === 'des'
           ? CryptoJS.DES.decrypt(res, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            )
+            CryptoJS.enc.Utf8
+          )
           : CryptoJS.AES.decrypt(res, this.screctKey).toString(
-              CryptoJS.enc.Utf8
-            );
+            CryptoJS.enc.Utf8
+          );
     }
     return res;
   }
@@ -115,8 +115,8 @@ export class Cookie {
     }
     return new RegExp(
       '(?:^|;\\s*)' +
-        encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
-        '\\s*\\='
+      encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&') +
+      '\\s*\\='
     ).test(document.cookie);
   }
   public keys(): string[] {

@@ -3,6 +3,12 @@ const shellJs = require('shelljs')
 const merge = require('webpack-merge')
 const fs = require('fs')
 shellJs.exec('rm -rf dist/*')
+
+fs.copyFileSync(path.resolve(__dirname, 'type.d.ts'), path.resolve(__dirname, 'dist', 'storage-umd.d.ts'))
+fs.copyFileSync(path.resolve(__dirname, 'type.d.ts'), path.resolve(__dirname, 'dist', 'storage-amd.d.ts'))
+fs.copyFileSync(path.resolve(__dirname, 'type.d.ts'), path.resolve(__dirname, 'dist', 'storage-esm.d.ts'))
+fs.copyFileSync(path.resolve(__dirname, 'type.d.ts'), path.resolve(__dirname, 'dist', 'storage-commonjs.d.ts'))
+fs.copyFileSync(path.resolve(__dirname, 'type.d.ts'), path.resolve(__dirname, 'dist', 'storage-commonjs2.d.ts'))
 const base = {
   mode: 'production',
   entry: path.join(__dirname, 'index.ts'),
@@ -20,10 +26,10 @@ const base = {
   },
   externals: {
     'crypto-js': {
-        commonjs: 'crypto-js',
-        commonjs2: 'crypto-js',
-        amd: 'crypto-js',
-        root: 'cryptoJs'
+      commonjs: 'crypto-js',
+      commonjs2: 'crypto-js',
+      amd: 'crypto-js',
+      root: 'cryptoJs'
     }
   },
   target: 'web',

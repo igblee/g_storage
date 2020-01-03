@@ -1,10 +1,11 @@
-import { Cookie } from './lib/cookie';
-import { LocalStorage, SessionStorage } from './lib/storage';
+import { Cookie } from './src/cookie';
+import { LocalStorage, SessionStorage } from './src/storage';
+import { IStorage, IStorageItem, ICookie } from './type.d';
 
-export default class Storage {
-  public cookie: Cookie;
-  public localStorage: LocalStorage;
-  public sessionStorage: SessionStorage;
+class NSStorage implements IStorage {
+  public cookie: ICookie;
+  public localStorage: IStorageItem;
+  public sessionStorage: IStorageItem;
   private ns: string;
   private encryption: boolean;
   private encryptionType: string;
@@ -34,3 +35,5 @@ export default class Storage {
     );
   }
 }
+
+module.exports = NSStorage;
